@@ -1,0 +1,75 @@
+Design  a database  for the following  scenario 
+Taj group of hotels operates hotels in various  cities across the country. 
+Each hotel has different  types of rooms namely  single, double  and family 
+The price for each depends on the type. The name of the guests, their Mobile  number and their city must be recorded.  The booking details of each room , date from, Date to must be stores. 
+Create necessary tables with suitable  columns along with their data types  and constraints. 
+Display the structure of all tables
+Insert at least 5 records into each table
+
+-- Create Hotels Table
+CREATE TABLE Hotels (
+    hotel_id INT PRIMARY KEY,
+    hotel_name VARCHAR(100),
+    city VARCHAR(100)
+);
+
+-- Create RoomTypes Table
+CREATE TABLE RoomTypes (
+    room_type_id INT PRIMARY KEY,
+    room_type VARCHAR(50),
+    price DECIMAL(10, 2)
+);
+
+-- Create Guests Table
+CREATE TABLE Guests (
+    guest_id INT PRIMARY KEY,
+    guest_name VARCHAR(100),
+    mobile_number VARCHAR(15),
+    city VARCHAR(100)
+);
+
+-- Create Bookings Table
+CREATE TABLE Bookings (
+    booking_id INT PRIMARY KEY,
+    hotel_id INT,
+    guest_id INT,
+    room_type_id INT,
+    date_from DATE,
+    date_to DATE,
+    FOREIGN KEY (hotel_id) REFERENCES Hotels(hotel_id),
+    FOREIGN KEY (guest_id) REFERENCES Guests(guest_id),
+    FOREIGN KEY (room_type_id) REFERENCES RoomTypes(room_type_id)
+);
+
+-- Insert into Hotels
+INSERT INTO Hotels VALUES (1, 'Taj Mumbai', 'Mumbai'), 
+                          (2, 'Taj Delhi', 'Delhi'), 
+                          (3, 'Taj Chennai', 'Chennai'), 
+                          (4, 'Taj Kolkata', 'Kolkata'), 
+                          (5, 'Taj Bangalore', 'Bangalore');
+
+-- Insert into RoomTypes
+INSERT INTO RoomTypes VALUES (1, 'Single', 5000), 
+                             (2, 'Double', 8000), 
+                             (3, 'Family', 12000);
+
+-- Insert into Guests
+INSERT INTO Guests VALUES (1, 'John Doe', '9876543210', 'Mumbai'), 
+                          (2, 'Jane Smith', '9876501234', 'Delhi'), 
+                          (3, 'Emily Davis', '9876512345', 'Chennai'), 
+                          (4, 'Michael Brown', '9876523456', 'Kolkata'), 
+                          (5, 'Sarah Wilson', '9876534567', 'Bangalore');
+
+-- Insert into Bookings
+INSERT INTO Bookings VALUES 
+(1, 1, 1, 1, '2023-12-20', '2023-12-25'),
+(2, 2, 2, 2, '2023-12-22', '2023-12-28'),
+(3, 3, 3, 3, '2023-12-15', '2023-12-20'),
+(4, 4, 4, 1, '2023-12-10', '2023-12-15'),
+(5, 5, 5, 2, '2023-12-12', '2023-12-18');
+
+
+DESCRIBE Hotels;
+DESCRIBE RoomTypes;
+DESCRIBE Guests;
+DESCRIBE Bookings;

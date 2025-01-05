@@ -1,0 +1,71 @@
+Examine  the cities table 
+Name       type
+Cityid        int
+Cname     varchar
+Country   varchar 
+Continent 
+varchar 
+Population  decimal 
+
+Write queries to answer the  following 
+1. Find the name and Population of all cities in Asia.
+2. Display the city name and Country name of all cities in Europe whose Population is more than 16.0.
+3. Find the total population of each Country 
+4. Find the highest populated city in  Africa.
+5. Find the average population of all cities in India 
+6. Find the minimum population of of each Country in each continent.
+7. Find the cities in north America and Africa
+
+
+
+CREATE TABLE cities (
+    cityid INT PRIMARY KEY,
+    cname VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    continent VARCHAR(100) NOT NULL,
+    population DECIMAL(15, 2) NOT NULL
+);
+-- Insert records into cities table
+INSERT INTO cities (cityid, cname, country, continent, population) VALUES
+(1, 'New York', 'United States', 'North America', 8419600),
+(2, 'Tokyo', 'Japan', 'Asia', 13929286),
+(3, 'London', 'United Kingdom', 'Europe', 8982000),
+(4, 'Sydney', 'Australia', 'Oceania', 5312163),
+(5, 'Mumbai', 'India', 'Asia', 12442373);
+
+
+1. SQL Query:
+SELECT Cname, Population 
+FROM Cities 
+WHERE Continent = 'Asia';
+
+2. SQL Query:
+SELECT Cname, Country 
+FROM Cities 
+WHERE Continent = 'Europe' AND Population > 16.0;
+
+3. SQL QUERY:
+SELECT Country, SUM(Population) AS TotalPopulation 
+FROM Cities 
+GROUP BY Country;
+
+4. SQL Query:
+SELECT Cname, MAX(Population) AS HighestPopulation 
+FROM Cities 
+WHERE Continent = 'Africa';
+
+5.SQL Query:
+SELECT AVG(Population) AS AveragePopulation 
+FROM Cities 
+WHERE Country = 'India';
+
+
+6. SQL Query:
+SELECT Continent, Country, MIN(Population) AS MinimumPopulation 
+FROM Cities 
+GROUP BY Continent, Country;
+
+7. SQL Query:
+SELECT Cname 
+FROM Cities 
+WHERE Continent IN ('North America', 'Africa');
